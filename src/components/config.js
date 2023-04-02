@@ -2,22 +2,14 @@
 export const componentConfigs = [
   {
     id: 0,
-    // 自定义配置
-    __config__: {
-      label: '单行文本',
-      labelWidth: null,
-      tag: 'el-input',
-      defaultValue: undefined,
-      required: true,
-      layout: 'ColFormItem',
-      span: 24,
-    },
-    // 插槽属性
-    __slot__: {
-      prepend: '',
-      append: ''
-    },
-    // 组件自身属性
+    type: 'input',
+    label: '单行文本',
+    tag: 'el-input',
+    layout: 'colFormItem',
+    labelWidth: null,
+    defaultValue: undefined,
+    required: true,
+    span: 24,
     placeholder: '请输入',
     style: { width: '100%' },
     clearable: true,
@@ -26,16 +18,14 @@ export const componentConfigs = [
   },
   {
     id: 1,
-    __config__: {
-      label: '多行文本',
-      labelWidth: null,
-      tag: 'el-input',
-      defaultValue: undefined,
-      required: true,
-      layout: 'ColFormItem',
-      span: 24,
-    },
     type: 'textarea',
+    label: '多行文本',
+    tag: 'el-input',
+    layout: 'colFormItem',
+    labelWidth: null,
+    defaultValue: undefined,
+    required: true,
+    span: 24,
     placeholder: '请输入',
     autosize: {
       minRows: 2,
@@ -47,24 +37,24 @@ export const componentConfigs = [
   },
   {
     id: 2,
-    __config__: {
-      label: '下拉选择',
-      showLabel: true,
-      labelWidth: null,
-      tag: 'el-select',
-      required: true,
-      layout: 'ColFormItem',
-      span: 24,
-    },
-    __slot__: {
-      options: [{
+    type: 'select',
+    label: '下拉选择',
+    tag: 'el-select',
+    layout: 'colFormItem',
+    showLabel: true,
+    labelWidth: null,
+    required: true,
+    span: 24,
+    options: [
+      {
         label: '选项一',
         value: 1
-      }, {
+      },
+      {
         label: '选项二',
         value: 2
-      }]
-    },
+      }
+    ],
     placeholder: '请选择',
     style: { width: '100%' },
     clearable: true,
@@ -72,52 +62,52 @@ export const componentConfigs = [
   },
   {
     id: 3,
-    __config__: {
-      label: '单选框组',
-      labelWidth: null,
-      tag: 'el-radio-group',
-      changeTag: true,
-      defaultValue: undefined,
-      layout: 'ColFormItem',
-      span: 24,
-      optionType: 'default',
-      required: true,
-      border: false,
-    },
-    __slot__: {
-      options: [{
+    type: 'radio',
+    label: '单选框组',
+    tag: 'el-radio-group',
+    layout: 'colFormItem',
+    labelWidth: null,
+    changeTag: true,
+    defaultValue: undefined,
+    span: 24,
+    optionType: 'default',
+    required: true,
+    border: false,
+    options: [
+      {
         label: '选项一',
         value: 1
-      }, {
+      },
+      {
         label: '选项二',
         value: 2
-      }]
-    },
+      }
+    ],
     style: {},
     disabled: false
   },
   {
     id: 4,
-    __config__: {
-      label: '多选框组',
-      tag: 'el-checkbox-group',
-      defaultValue: [],
-      span: 24,
-      labelWidth: null,
-      layout: 'ColFormItem',
-      optionType: 'default',
-      required: true,
-      border: false,
-    },
-    __slot__: {
-      options: [{
+    type: 'checkbox',
+    label: '多选框组',
+    tag: 'el-checkbox-group',
+    layout: 'colFormItem',
+    labelWidth: null,
+    defaultValue: [],
+    span: 24,
+    optionType: 'default',
+    required: true,
+    border: false,
+    options: [
+      {
         label: '选项一',
         value: 1
-      }, {
+      },
+      {
         label: '选项二',
         value: 2
-      }]
-    },
+      }
+    ],
     style: {},
     disabled: false
   },

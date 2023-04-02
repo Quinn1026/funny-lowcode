@@ -4,25 +4,28 @@
       <div class="header">
         <b>FUNNY</b>
         <div class="tools-btns">
-          <el-button>查看JSON</el-button>
+          <el-button @click="handleViewJson">查看JSON</el-button>
           <el-button>清空</el-button>
         </div>
       </div>
     </el-header>
     <div class="main">
       <!-- 左侧组件和中间编辑区域 -->
-      <MainEditor />
-
-      <!-- 右侧属性面板 -->
-      <RightAttributePanel />
+      <MainEditor ref="editor" />
     </div>
   </el-container>
 </template>
 
 <script setup>
-import MainEditor from './MainEditor.vue'
-import RightAttributePanel from './RightAttributePanel.vue'
+import MainEditor from './MainEditor'
+import { ref } from 'vue'
 
+const editor = ref(null)
+
+const handleViewJson = () => {
+  console.log(`view json`)
+  editor.value?.viewJson?.()
+}
 </script>
 
 <style>
