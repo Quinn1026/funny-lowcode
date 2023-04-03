@@ -22,11 +22,12 @@
         <Draggable
           class="center-draggable"
           :list="list"
-          :group="{ name: 'componentsGroup', pull: false, put: true }"
+          group="componentsGroup"
           animation="300"
           item-key="id">
           <template #item="{ element, index }">
-            <DraggableItem :config="element" @update-value="(val) => handleUpdateValue(val, element, index)" />
+            <RowItem v-if="element.type === 'container'" :children="element.children" @update-value="(val) => handleUpdateValue(val, element, index)" />
+            <DraggableItem v-else :config="element" @update-value="(val) => handleUpdateValue(val, element, index)" />
           </template>
         </Draggable>
         <!-- <div v-if="!list.length" class="component-empty">请拖入组件...</div> -->
@@ -42,6 +43,7 @@
 <script setup>
 import Draggable from 'vuedraggable'
 import DraggableItem from './DraggableItem'
+import RowItem from './RowItem.vue'
 import { ref, reactive } from 'vue'
 import { componentConfigs } from '@/components/config'
 import {
@@ -54,16 +56,24 @@ const list = ref([])
 const onStart = (e) => {}
 const onEnd = (e) => {}
 
-const handleUpdateValue = (val, ele, idx) => {
-  list.value[idx].value = val
+const handleUpdateValue = (val, el, idx) => {
+  if (el.type === 'container') {
+    list.value[idx].children = val
+  } else {
+    list.value[idx].value = val
+  }
 }
 
 const cloneComponent = (clone) => {
   const temp = deepClone(clone)
   const { type } = temp
   temp.id = `add${++idGlobal}`
-  temp.code = `code${++idGlobal}`
-  temp.value = type === 'checkbox' ? [] : null
+  if (type === 'container') {
+    !Array.isArray(temp.children) && (temp.children = [])
+  } else {
+    temp.code = `code${++idGlobal}`
+    temp.value = type === 'checkbox' ? [] : null
+  }
   return temp
 }
 
@@ -75,7 +85,7 @@ const viewJson = () => {
 defineExpose({ viewJson })
 </script>
 
-<style>
+<style scoped>
 .container {
   display: flex;
 }

@@ -43,6 +43,7 @@
           {{ item.label }}
         </el-checkbox>
       </el-checkbox-group>
+      <div v-else>{{ item.label }}</div>
     </el-form-item>
   </el-col>
 </template>

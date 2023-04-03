@@ -111,4 +111,13 @@ export const componentConfigs = [
     style: {},
     disabled: false
   },
+  {
+    id: 20,
+    type: 'container',
+    label: '容器',
+    layout: 'rowFormItem',
+    span: 24,
+    style: {},
+    children: []
+  },
 ]
