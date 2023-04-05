@@ -26,8 +26,20 @@
           animation="300"
           item-key="id">
           <template #item="{ element, index }">
-            <RowItem v-if="element.type === 'container'" :children="element.children" @update-value="(val) => handleUpdateValue(val, element, index)" />
-            <DraggableItem v-else :config="element" @update-value="(val) => handleUpdateValue(val, element, index)" />
+            <RowItem
+              v-if="element.type === 'container'"
+              :children="element.children"
+              :activeId="activeId"
+              @update-value="(val) => handleUpdateValue(val, element, index)"
+              @on-active="handleActvieItem"
+            />
+            <DraggableItem
+              v-else
+              :config="element"
+              :activeId="activeId"
+              @update-value="(val) => handleUpdateValue(val, element, index)"
+              @on-active="handleActvieItem"
+            />
           </template>
         </Draggable>
         <!-- <div v-if="!list.length" class="component-empty">请拖入组件...</div> -->
@@ -64,6 +76,11 @@ const handleUpdateValue = (val, el, idx) => {
   }
 }
 
+const activeId = ref('')
+const handleActvieItem = (item) => {
+  activeId.value = item.id
+}
+
 const cloneComponent = (clone) => {
   const temp = deepClone(clone)
   const { type } = temp
@@ -98,6 +115,7 @@ defineExpose({ viewJson })
   flex: 1;
   border-left: 1px solid #e9ebec;
   border-right: 1px solid #e9ebec;
+  padding: 8px;
 }
 .component-empty {
   width: 120px;

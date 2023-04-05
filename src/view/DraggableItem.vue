@@ -1,5 +1,8 @@
 <template>
-  <el-col :span="config.span">
+  <el-col
+    :span="config.span"
+    :class="[{ 'active-item': isActive }, 'component-item']"
+    @click.stop="() => handleClick(config)">
     <el-form-item :label="config.label">
       <el-input
         v-if="config.type === 'input'"
@@ -15,6 +18,7 @@
       <el-select
         v-else-if="config.type === 'select'"
         v-model="val"
+        :style="config.style"
         placeholder="请选择...">
         <el-option
           v-for="(item) in config.options"
@@ -49,14 +53,32 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, toRef, watch, computed } from 'vue'
 
-const props = defineProps(['config'])
-const emit = defineEmits(['updateValue'])
+const props = defineProps(['config', 'activeId'])
+const emit = defineEmits(['updateValue', 'onActive'])
 
 const val = ref(props.config?.value)
-
 watch(val, (value) => {
   emit('updateValue', value)
 })
+
+const currentId = props.config?.id
+const isActive = computed(() => {
+  return currentId === props.activeId
+})
+const handleClick = () => {
+  emit('onActive', props.config)
+}
 </script>
+
+<style lang="less" scoped>
+.component-item {
+  padding: 6px;
+  margin: 6px 6px 0;
+  border-radius: 6px;
+}
+.active-item {
+  background-color: #e1f3d8;
+}
+</style>

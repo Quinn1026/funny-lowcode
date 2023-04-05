@@ -7,7 +7,11 @@
       animation="300"
       item-key="id">
       <template #item="{ element, index }">
-        <DraggableItem :config="element" @update-value="(val) => handleUpdateValue(val, element, index)" />
+        <DraggableItem
+          :config="element"
+          @update-value="(val) => handleUpdateValue(val, element, index)"
+          v-bind="$attrs"
+        />
       </template>
     </Draggable>
   </el-row>
@@ -36,7 +40,8 @@ const handleUpdateValue = (val, el, idx) => {
 <style scoped>
 .children-draggable {
   width: 100%;
-  min-height: 100px;
-  border: 1px solid black;
+  min-height: 80px;
+  border: 1px dashed #999;
+  border-radius: 6px;
 }
 </style>
