@@ -121,3 +121,7 @@ export const componentConfigs = [
     children: []
   },
 ]
+
+export const getComponentsType = () => {
+  return componentConfigs.map(({ type: value, label }) => ({ value, label }))
+}

@@ -75,7 +75,7 @@ const handleClick = () => {
 <style lang="less" scoped>
 .component-item {
   padding: 6px;
-  margin: 6px 6px 0;
+  /* margin: 6px 6px 0; */
   border-radius: 6px;
 }
 .active-item {

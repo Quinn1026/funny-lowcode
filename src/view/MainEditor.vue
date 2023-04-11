@@ -47,7 +47,7 @@
     </div>
     <!-- 属性面板 -->
     <div class="right-board">
-
+      <AttrEditor :activeItem="activeItem" />
     </div>
   </div>
 </template>
@@ -55,7 +55,8 @@
 <script setup>
 import Draggable from 'vuedraggable'
 import DraggableItem from './DraggableItem'
-import RowItem from './RowItem.vue'
+import RowItem from './RowItem'
+import AttrEditor from './AttrEditor'
 import { ref, reactive } from 'vue'
 import { componentConfigs } from '@/components/config'
 import {
@@ -77,8 +78,10 @@ const handleUpdateValue = (val, el, idx) => {
 }
 
 const activeId = ref('')
+const activeItem = ref({})
 const handleActvieItem = (item) => {
   activeId.value = item.id
+  activeItem.value = item
 }
 
 const cloneComponent = (clone) => {
@@ -139,7 +142,7 @@ defineExpose({ viewJson })
   height: calc(100vh - 76px);
 }
 .center-draggable {
-  height: 100%;
+  min-height: 68px;
 }
 .right-board {
   width: 350px;
